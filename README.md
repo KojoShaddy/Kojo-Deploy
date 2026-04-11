@@ -1,5 +1,7 @@
 # Kojo-Deploy 🚀
 
+[![npm package](https://img.shields.io/badge/npm-@kojo__shaddy/kojo--deploy-blue)](https://www.npmjs.com/package/@kojo_shaddy/kojo-deploy)
+
 A lightweight, npm-integrated CLI utility designed to simplify the developer experience when hosting applications on Google Cloud Platform.
 
 ## Features
@@ -8,6 +10,9 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 - **Smart Defaults**: Infers service names and project settings.
 - **Zero-Config Docker**: Generates a Dockerfile if one is missing.
 - **Cloud Run Ready**: Scales your app from zero to hero automatically.
+- **Live URL**: Instant production URL provided at the end.
+
+![Kojo-Deploy Demo](./demo.jpg)
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) installed.
