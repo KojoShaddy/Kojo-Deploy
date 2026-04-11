@@ -46,10 +46,5 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 ## Mission
 Kojo-Deploy acts as a "digital engine" for the global tech community, making cloud infrastructure accessible and fast, so engineers can focus on writing code rather than managing consoles.
 
-## For Maintainers
-To update this tool and publish a new version to NPM:
-1. Make your changes.
-2. Run `npm run release`.
-
 ---
 Created with ❤️ by [Shadrack Inusah](https://kojoshaddy.pages.dev/)
