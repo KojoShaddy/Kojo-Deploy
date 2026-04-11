@@ -14,6 +14,13 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 
 ![Kojo-Deploy Demo](./demo.jpg)
 
+## Getting Started
+
+You can deploy your project in seconds without even installing it:
+```bash
+npx @kojo_shaddy/kojo-deploy 
+```
+
 ## Prerequisites
 - [Node.js](https://nodejs.org/) installed.
 - [Google Cloud SDK (gcloud)](https://cloud.google.com/sdk/docs/install) installed.
