@@ -25,7 +25,12 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
    ```bash
    npm install --save-dev @kojo_shaddy/kojo-deploy
    ```
-   *Note: Kojo-Deploy automatically adds the deployment script to your `package.json` for you!*
+   *Note: Kojo-Deploy automatically adds the following deployment script to your `package.json` for you!*
+   ```json
+   "scripts": {
+     "kojo-deploy": "kojo-deploy"
+   }
+   ```
 
 2. **Deploy:**
    ```bash
