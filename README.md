@@ -14,12 +14,6 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 
 ![Kojo-Deploy Demo](./demo.jpg)
 
-## Getting Started
-
-You can deploy your project in seconds without even installing it:
-```bash
-npx @kojo_shaddy/kojo-deploy 
-```
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) installed.
@@ -27,7 +21,13 @@ npx @kojo_shaddy/kojo-deploy
 - A GCP Project with Billing enabled.
 
 ## Quick Start
+### Option 1
+You can deploy your project in seconds without even installing it:
+```bash
+npx @kojo_shaddy/kojo-deploy 
+```
 
+### Option 2
 1. **Add Kojo-Deploy to your project:**
    ```bash
    npm install --save-dev @kojo_shaddy/kojo-deploy
