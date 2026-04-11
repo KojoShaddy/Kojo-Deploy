@@ -42,4 +42,4 @@ To update this tool and publish a new version to NPM:
 2. Run `npm run release`.
 
 ---
-Created with ❤️ by Kojo Shaddy
+Created with ❤️ by [Shadrack Inusah](https://kojoshaddy.pages.dev/)
