@@ -11,6 +11,7 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 - **Zero-Config Docker**: Generates a Dockerfile if one is missing.
 - **Cloud Run Ready**: Scales your app from zero to hero automatically.
 - **Live URL**: Instant production URL provided at the end.
+- **Upcoming**: Real-time log streaming with `--logs` flag (coming soon!)
 
 ![Kojo-Deploy Demo](./demo.jpg)
 
