@@ -162,9 +162,9 @@ async function runEngine() {
     }
 
     // Enable necessary services
-    const apiSpinner = ora('Enabling Cloud Run and Cloud Build APIs...').start();
+    const apiSpinner = ora('Enabling Cloud Run, Cloud Build, and Secret Manager APIs...').start();
     try {
-        await execa('gcloud', ['services', 'enable', 'run.googleapis.com', 'cloudbuild.googleapis.com']);
+        await execa('gcloud', ['services', 'enable', 'run.googleapis.com', 'cloudbuild.googleapis.com', 'secretmanager.googleapis.com']);
         apiSpinner.succeed(chalk.green('Required APIs enabled!'));
     } catch (error) {
         apiSpinner.fail(chalk.red(`Failed to enable APIs: ${error.message}`));
@@ -218,6 +218,37 @@ CMD ["npm", "start"]
         }
     }
 
+    // Parse args for secrets
+    const args = process.argv.slice(2);
+    const secretsFlagIndex = args.indexOf('--secrets');
+    let secretsValue = '';
+    if (secretsFlagIndex !== -1 && args.length > secretsFlagIndex + 1) {
+        secretsValue = args[secretsFlagIndex + 1];
+    }
+
+    // Parse .env file
+    let envVars = [];
+    const envPath = path.join(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+        log(chalk.cyan(`\nFound .env file. Variables will be injected into Cloud Run.`));
+        const envContent = fs.readFileSync(envPath, 'utf-8');
+        const lines = envContent.split('\n');
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+                const index = trimmed.indexOf('=');
+                const key = trimmed.substring(0, index).trim();
+                let val = trimmed.substring(index + 1).trim();
+                val = val.replace(/^['"](.*)['"]$/, '$1'); // remove quotes if any
+                if (key) {
+                    // escape comma and equals if necessary? gcloud set-env-vars handles comma separated KEY=VALUE.
+                    envVars.push(`${key}=${val}`);
+                }
+            }
+        }
+    }
+    const envVarsString = envVars.join(',');
+
     // 4. Deployment
     log(chalk.cyan(`\nStarting deployment for ${serviceName}...`));
     log(chalk.gray(`Note: Initial builds may take 2-5 minutes depending on dependencies.`));
@@ -243,14 +274,25 @@ CMD ["npm", "start"]
         buildSpinner.succeed(chalk.green('Build successful! Image pushed to GCR.'));
 
         const deploySpinner = ora('Deploying to Cloud Run...').start();
-        const { stdout } = await execa('gcloud', [
+        
+        const deployArgs = [
             'run', 'deploy', serviceName,
             '--image', imageTag,
             '--platform', 'managed',
             '--region', region,
             '--allow-unauthenticated',
             '--format=json'
-        ]);
+        ];
+
+        if (envVarsString) {
+            deployArgs.push('--set-env-vars', envVarsString);
+        }
+
+        if (secretsValue) {
+            deployArgs.push('--set-secrets', secretsValue);
+        }
+
+        const { stdout } = await execa('gcloud', deployArgs);
         
         const deployInfo = JSON.parse(stdout);
         deploySpinner.succeed(chalk.green('Deployment successful! 🎉'));

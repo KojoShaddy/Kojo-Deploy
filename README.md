@@ -44,6 +44,22 @@ npx @kojo_shaddy/kojo-deploy
 3. **Containerization**: Builds your app using Google Cloud Build.
 4. **Deployment**: Deploys the image to Cloud Run (Managed) with unauthenticated access enabled.
 
+## Environment Variables & Secrets
+### Local Environment Variables
+If a `.env` file is present in your project's root directory, Kojo-Deploy will automatically read it and inject the environment variables into your Cloud Run service during deployment. **Note:** `.env` is typically excluded from version control by `.gitignore` automatically.
+
+### Google Secret Manager Integration
+For sensitive values (like database passwords or API keys) in production, you should use Google Secret Manager rather than plain text environment variables. Kojo-Deploy automatically enables the Secret Manager API in your GCP project.
+
+You can securely pass secrets to your service using the `--secrets` flag, mapping the environment variable name to the Secret Manager path:
+```bash
+npx @kojo_shaddy/kojo-deploy --secrets "DB_PASS=projects/PROJECT_ID/secrets/db_password/versions/latest"
+```
+If using an npm script, pass the arguments like this:
+```bash
+npm run kojo-deploy -- --secrets "API_KEY=projects/PROJECT_ID/secrets/my_api_key/versions/latest"
+```
+
 ## Mission
 Kojo-Deploy acts as a "digital engine" for the global tech community, making cloud infrastructure accessible and fast, so engineers can focus on writing code rather than managing consoles.
 
