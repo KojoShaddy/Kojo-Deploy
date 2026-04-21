@@ -15,7 +15,7 @@ async function banner() {
        🚀 KOJO-DEPLOY ENGINE IS STARTING...
     =========================================
     `));
-    log(chalk.gray(`Lightweight GCP Deployment Utility by Kojo Shaddy\n`));
+    log(chalk.gray(`Lightweight GCP Deployment Utility by Shadrack Inusah\n`));
 }
 
 async function checkGcloud() {
@@ -36,7 +36,7 @@ async function checkAuth() {
         const { stdout } = await execa('gcloud', ['auth', 'list', '--format=json']);
         const auths = JSON.parse(stdout);
         const activeAccount = auths.find(a => a.status === 'ACTIVE');
-        
+
         if (!activeAccount) {
             spinner.info(chalk.yellow('No active Google Cloud session found.'));
             spinner.stop();
@@ -55,7 +55,7 @@ async function openBilling(projectId) {
     const url = `https://console.cloud.google.com/billing/linkedaccount?project=${projectId}`;
     log(chalk.yellow(`\n⚠️  IMPORTANT: Cloud Run requires an active billing account.`));
     log(chalk.cyan(`Opening billing configuration in your browser...`));
-    
+
     // Windows specific open command
     try {
         await execa('cmd', ['/c', 'start', url]);
@@ -122,7 +122,7 @@ async function runEngine() {
             }
         ]);
         projectId = newId;
-        
+
         const createSpinner = ora(`Creating project ${projectId}...`).start();
         try {
             await execa('gcloud', ['projects', 'create', projectId]);
@@ -146,7 +146,7 @@ async function runEngine() {
 
     // 2. Billing Check (Opening URL)
     await openBilling(projectId);
-    
+
     const { billingDone } = await inquirer.prompt([
         {
             type: 'confirm',
@@ -252,14 +252,14 @@ CMD ["npm", "start"]
     // 4. Deployment
     log(chalk.cyan(`\nStarting deployment for ${serviceName}...`));
     log(chalk.gray(`Note: Initial builds may take 2-5 minutes depending on dependencies.`));
-    
+
     try {
         const buildSpinner = ora('Submitting build to Cloud Build...').start();
         const imageTag = `gcr.io/${projectId}/${serviceName}`;
-        
+
         // Run build and capture stdout to show log link
         const buildProcess = execa('gcloud', ['builds', 'submit', '--tag', imageTag]);
-        
+
         // Scrape for the logs URL which usually appears early
         buildProcess.stdout.on('data', (data) => {
             const line = data.toString();
@@ -274,7 +274,7 @@ CMD ["npm", "start"]
         buildSpinner.succeed(chalk.green('Build successful! Image pushed to GCR.'));
 
         const deploySpinner = ora('Deploying to Cloud Run...').start();
-        
+
         const deployArgs = [
             'run', 'deploy', serviceName,
             '--image', imageTag,
@@ -293,14 +293,14 @@ CMD ["npm", "start"]
         }
 
         const { stdout } = await execa('gcloud', deployArgs);
-        
+
         const deployInfo = JSON.parse(stdout);
         deploySpinner.succeed(chalk.green('Deployment successful! 🎉'));
-        
+
         log(chalk.cyan('\n-----------------------------------------'));
         log(chalk.white(`Service URL: ${chalk.bold.underline(deployInfo.status.url)}`));
         log(chalk.cyan('-----------------------------------------\n'));
-        
+
     } catch (error) {
         log(chalk.red(`\nDeployment failed: ${error.message}`));
         process.exit(1);
