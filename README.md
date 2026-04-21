@@ -3,6 +3,7 @@
 # Kojo-Deploy 🚀
 
 [![npm package](https://img.shields.io/badge/npm-@kojo__shaddy/kojo--deploy-blue)](https://www.npmjs.com/package/@kojo_shaddy/kojo-deploy)
+[![github repo](https://img.shields.io/badge/github-repo-black?logo=github)](https://github.com/KojoShaddy/Kojo-Deploy)
 
 A lightweight, npm-integrated CLI utility designed to simplify the developer experience when hosting applications on Google Cloud Platform.
 
@@ -19,7 +20,6 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 
 
 ## Prerequisites
-- [Node.js](https://nodejs.org/) installed.
 - [Google Cloud SDK (gcloud)](https://cloud.google.com/sdk/docs/install) installed.
 - A GCP Project with Billing enabled.
 
@@ -46,6 +46,43 @@ npx @kojo_shaddy/kojo-deploy
 2. **Configuration**: Prompts for Project ID and Service Name.
 3. **Containerization**: Builds your app using Google Cloud Build.
 4. **Deployment**: Deploys the image to Cloud Run (Managed) with unauthenticated access enabled.
+
+## Authentication Under the Hood
+
+The authentication check essentially **delegates** to GCP's own authentication system rather than reimplementing it. 
+
+### What It Does vs. Doesn't Do
+
+| What Kojo-Deploy Does | What It Doesn't Do |
+| :----------------------- | :-------------------- |
+| ✅ Leverages GCP's native auth system | ❌ Doesn't store credentials |
+| ✅ Uses secure Google OAuth flow | ❌ Doesn't handle token refresh manually |
+| ✅ Works across all platforms (Windows, Mac, Linux) | ❌ Doesn't reinvent the wheel |
+| ✅ Automatically uses your existing GCP sessions | ❌ Doesn't require additional setup |
+| ✅ Supports multi-account scenarios | ❌ Doesn't manage multiple auth providers |
+
+### The Flow in Action
+
+```txt
+User runs kojo-deploy
+    ↓
+✅ checkGcloud() → Confirms gcloud exists
+    ↓
+✅ checkAuth() → Queries gcloud auth list
+    ↓
+    ├─→ Active account found? → Continue deployment 🚀
+    ├─→ No active account? → Spawn browser login 
+    │                         → gcloud auth login
+    │                         → OAuth redirect to Google
+    │                         → User authenticates
+    │                         → Return to terminal with fresh session
+    │                         → Continue deployment 🚀
+    └─→ Error? → Exit gracefully ❌
+```
+
+### The Bottom Line 💎
+
+Kojo-Deploy doesn't play authentication—it plays orchestra conductor. It orchestrates Google Cloud's battle-tested authentication system through elegant CLI commands and smart error handling. This is why it's so reliable, so secure, and so effortless for users.
 
 ## Environment Variables & Secrets
 ### Local Environment Variables
