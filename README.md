@@ -82,7 +82,7 @@ User runs kojo-deploy
 
 ### The Bottom Line 
 
-Kojo-Deploy doesn't play authentication—it plays orchestra conductor. It orchestrates Google Cloud's battle-tested authentication system through elegant CLI commands and smart error handling. This is why it's so reliable, so secure, and so effortless for users.
+Kojo-Deploy doesn't play authentication, it plays orchestra conductor. It orchestrates Google Cloud's battle-tested authentication system through elegant CLI commands and smart error handling. This is why it's so reliable, so secure, and so effortless for users.
 
 ## Environment Variables & Secrets
 ### Local Environment Variables

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function setup() {
-    // INIT_CWD is the directory where the user ran 'npm install'
+    // The directory where the user ran 'npm install'
     const projectRoot = process.env.INIT_CWD;
 
     if (!projectRoot) {
@@ -15,7 +15,7 @@ async function setup() {
         try {
             const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
             
-            // Avoid modifying our own package.json if we are the one being installed
+            // Prevent modifying our own package.json during local development (only apply to consumers)
             if (pkg.name === '@kojo_shaddy/kojo-deploy') {
                 return;
             }
