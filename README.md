@@ -1,4 +1,4 @@
-![Kojo-Deploy Banner](./banner.png)
+![Kojo-Deploy Banner](./assets/banner.png)
 
 # Kojo-Deploy 🚀
 
@@ -16,7 +16,7 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 - **Live URL**: Instant production URL provided at the end.
 - **Upcoming**: Real-time log streaming with `--logs` flag (coming soon!)
 
-![Kojo-Deploy Demo](./demo.jpg)
+![Kojo-Deploy Demo](./assets/demo.jpg)
 
 
 ## Prerequisites
@@ -70,17 +70,17 @@ User runs kojo-deploy
     ↓
 ✅ checkAuth() → Queries gcloud auth list
     ↓
-    ├─→ Active account found? → Continue deployment 🚀
+    ├─→ Active account found? → Continue deployment 
     ├─→ No active account? → Spawn browser login 
     │                         → gcloud auth login
     │                         → OAuth redirect to Google
     │                         → User authenticates
     │                         → Return to terminal with fresh session
-    │                         → Continue deployment 🚀
-    └─→ Error? → Exit gracefully ❌
+    │                         → Continue deployment 
+    └─→ Error? → Exit gracefully 
 ```
 
-### The Bottom Line 💎
+### The Bottom Line 
 
 Kojo-Deploy doesn't play authentication—it plays orchestra conductor. It orchestrates Google Cloud's battle-tested authentication system through elegant CLI commands and smart error handling. This is why it's so reliable, so secure, and so effortless for users.
 
