@@ -16,7 +16,7 @@ async function setup() {
             const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
             
             // Prevent modifying our own package.json during local development (only apply to consumers)
-            if (pkg.name === '@kojo_shaddy/kojo-deploy') {
+            if (pkg.name === 'kojo-deploy') {
                 return;
             }
 

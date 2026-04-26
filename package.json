@@ -1,5 +1,5 @@
 {
-  "name": "@kojo_shaddy/kojo-deploy",
+  "name": "kojo-deploy",
   "version": "1.0.13",
   "description": "Simplified GCP deployment CLI utility",
   "main": "index.js",
@@ -20,7 +20,7 @@
     "deploy",
     "cli"
   ],
-  "author": "Kojo Shaddy",
+  "author": "Shadrack Inusah",
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.3.0",

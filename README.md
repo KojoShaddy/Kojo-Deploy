@@ -2,7 +2,7 @@
 
 # Kojo-Deploy 🚀
 
-[![npm package](https://img.shields.io/badge/npm-@kojo__shaddy/kojo--deploy-blue)](https://www.npmjs.com/package/@kojo_shaddy/kojo-deploy)
+[![npm package](https://img.shields.io/badge/npm-kojo--deploy-blue)](https://www.npmjs.com/package/kojo-deploy)
 [![github repo](https://img.shields.io/badge/github-repo-black?logo=github)](https://github.com/KojoShaddy/Kojo-Deploy)
 
 A lightweight, npm-integrated CLI utility designed to simplify the developer experience when hosting applications on Google Cloud Platform.
@@ -27,13 +27,13 @@ A lightweight, npm-integrated CLI utility designed to simplify the developer exp
 ### Option 1
 You can deploy your project in seconds without even installing it:
 ```bash
-npx @kojo_shaddy/kojo-deploy 
+npx kojo-deploy 
 ```
 
 ### Option 2
 1. **Add Kojo-Deploy to your project:**
    ```bash
-   npm install --save-dev @kojo_shaddy/kojo-deploy
+   npm install --save-dev kojo-deploy
    ```
 
 2. **Deploy:**
@@ -93,7 +93,7 @@ For sensitive values (like database passwords or API keys) in production, you sh
 
 You can securely pass secrets to your service using the `--secrets` flag, mapping the environment variable name to the Secret Manager path:
 ```bash
-npx @kojo_shaddy/kojo-deploy --secrets "DB_PASS=projects/PROJECT_ID/secrets/db_password/versions/latest"
+npx kojo-deploy --secrets "DB_PASS=projects/PROJECT_ID/secrets/db_password/versions/latest"
 ```
 If using an npm script, pass the arguments like this:
 ```bash
