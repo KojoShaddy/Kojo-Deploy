@@ -1,6 +1,6 @@
 {
   "name": "kojo-deploy",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Simplified GCP deployment CLI utility",
   "main": "index.js",
   "bin": {
