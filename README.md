@@ -8,7 +8,7 @@
 A lightweight, npm-integrated CLI utility designed to simplify the developer experience when hosting applications on Google Cloud Platform.
 
 ## Features
-- **One-Command Deployment**: `npm run kojo-deploy` handles everything.
+- **One-Command Deployment**: `npx kojo-deploy` handles everything.
 - **Auto-Auth**: Automatically checks and prompts for GCP authentication.
 - **Smart Defaults**: Infers service names and project settings.
 - **Zero-Config Docker**: Generates a Dockerfile if one is missing.
