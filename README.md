@@ -100,8 +100,8 @@ If using an npm script, pass the arguments like this:
 npm run kojo-deploy -- --secrets "API_KEY=projects/PROJECT_ID/secrets/my_api_key/versions/latest"
 ```
 
-## Mission
-Kojo-Deploy acts as a "digital engine" for the global tech community, making cloud infrastructure accessible and fast, so engineers can focus on writing code rather than managing consoles.
+
+Kojo-Deploy acts as a "digital engine" for developers making cloud infrastructure accessible and fast, so developers can focus on writing code rather than managing console.
 
 ---
 Created with ❤️ by [Shadrack Inusah](https://kojoshaddy.pages.dev/)
